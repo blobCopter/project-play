@@ -7,7 +7,7 @@ exports.geo_service = function(req, res)
     return;
   }
 
-  Place.findOneAndRemove({username : req.session.username}, function(err, removed_place)
+  Place.findOne({username : req.session.user.username}, function(err, place)
   {
     if (err)
     {
@@ -15,10 +15,17 @@ exports.geo_service = function(req, res)
       return;
     }
 
-    var place = new Place({
-      username : req.session.user.username,
-      geo : [req.body.posX, req.body.posY]
-    });
+    if (!place)
+    {
+      place = new Place({
+        username : req.session.user.username,
+        geo : [req.body.posX, req.body.posY]
+      });
+    }
+    else
+    {
+      place.geo = [req.body.posX, req.body.posY];
+    }
 
     place.findNear(function(err, places_near)
     {

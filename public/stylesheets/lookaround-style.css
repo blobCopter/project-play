@@ -3,19 +3,27 @@
 {
 	padding-left: 10%;
 	padding-right: 10%;
+	font-weight: lighter;
 }
 
 #nearbyTable
 {
-	color: white;
+	color: black;
+	background-color: white;
+}
+
+#nearbyTable th
+{
+	font-weight: lighter;
 }
 
 #leftSpan
 {
 	border : 1px solid white;
+	height : 100%;
 }
 
 #rightSpan
 {
-	border : 1px solid red;
+	text-align: center;
 }

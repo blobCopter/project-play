@@ -1,0 +1,32 @@
+extends layout
+
+//
+// HEAD
+//
+//
+append head
+	link(rel='stylesheet', href='/stylesheets/lookaround-style.css')
+	script(src='javascripts/lookaround-ajax-script.js')
+
+//
+// BODY
+//
+//
+block content
+	#lookAroundContainer
+		div#errorField(style="display:none")
+		.container-fluid
+			.row-fluid
+				.span2#leftSpan
+					p Look around
+					form#lookAroundButton(method="POST", action="/geosearch")
+						input.btn.btn-primary(type="submit", value="Start")
+					p#position
+				.span10#rightSpan
+					table#nearbyTable.table.table-hover
+						thead
+							tr
+								th User
+								th About
+								th Distance
+						tbody#tableNearbyBody

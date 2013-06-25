@@ -1,0 +1,27 @@
+doctype 5
+html
+	block head
+		title= locals.title
+		script(src='http://code.jquery.com/jquery.js')
+		script(src='javascripts/bootstrap.min.js')
+		script(src='javascripts/header-script.js')
+		link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
+		link(rel='stylesheet', href='/stylesheets/style.css')
+	body
+
+		#header
+			img(src="/images/geolocation-icon.svg")
+			div#headerTitle #{locals.title}
+			a(href="/", style="color:#27ae60") home
+			- if (session)
+				a(href="/geosearch", style="color:#f1c40f") search
+				a(href="/logout", style="color:#3498db") logout
+					//- if (session)
+					//	#userButton.btn.btn-primary.username #{session.user.username}
+
+
+		div(style="padding-top:5%;")
+			block content
+
+		#footer
+			div(style="text-align:center") #{locals.title}

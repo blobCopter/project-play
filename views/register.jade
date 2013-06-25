@@ -1,0 +1,73 @@
+extends layout
+
+block content
+
+	script
+		window.onload = function()
+		{
+			$("#registerForm").submit(function()
+			{
+				if($(this).attr('validated'))
+					return true;
+				$("#registerFormErrorField").html("");
+				$("#registerSubmitButton").popover('destroy');		
+				$.ajax({
+						type: 'POST',
+						url: "/register/check",
+						dataType: "JSON",
+						data: { 
+							username : $("input[name=username]").val(),
+							email : $("input[name=email]").val(),
+							password : $("input[name=password]").val(),
+							password_verif : $("input[name=password_verif]").val()
+						},
+						success : function(data) {
+							console.log(data);
+
+							if (data.isValid)
+							{
+								$('#registerForm').attr('validated',true);
+								$("#registerForm").submit();
+								return;
+							}
+
+							// ERROR UNORDERED LIST
+							var items = [];
+							$.each(data.errors, function(i, item) {
+								items.push("<li>" + item.msg + "</li>");
+							});
+							var ul = "<ul>" + items.join('') + "</ul>";
+							$("#registerSubmitButton").popover({placement : 'bottom', html:true, content: ul});
+							$("#registerSubmitButton").popover('show');
+						},
+						error : function(err) {
+							console.log("popover");
+							$("#registerSubmitButton").popover({placement : 'bottom', html:true, content:"Error. Unable to query server. Try again later."});
+							$("#registerSubmitButton").popover('show');
+						}
+					}
+				)
+
+				return false;
+			});
+		}		
+
+
+	div.row-fluid
+		div.span6(style="text-align: right;")
+			h1 Sign up
+			form#registerForm(method="POST", action="/register")
+				fieldset
+					input(name="username",type="text", placeholder="User name")
+					br
+					input(name="email", type="text", placeholder="Email")
+					br
+					input(name="password", type="password", placeholder="Password")
+					br
+					input(name="password_verif", type="password", placeholder="Retype password")
+					br 
+					input#registerSubmitButton.btn.btn-success.btn-large(type="submit", value="Register now", data-original-title="Registration Error")
+					- if (error_msg)
+						p #{error_msg}
+		div.span6
+			img.img-circle(src="/images/webmaster.jpg", style="width:20%")

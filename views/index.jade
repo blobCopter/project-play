@@ -1,0 +1,72 @@
+extends layout
+
+append head
+	link(rel='stylesheet', href='/stylesheets/index-style.css')
+	script
+		window.onload = function()
+		{
+			var colors = [
+				"#1abc9c", "#2ecc71", "#3498db", "#9b59b6", "#34495e",
+				"#16a085", "#27ae60", "#2980b9", "#8e44ad", "#2c3e50",
+				"#f1c40f", "#e67e22", "#e74c3c", "#ecf0f1", "#95a5a6",
+				"#f39c12", "#d35400", "#c0392b", "#bdc3c7", "#7f8c8d"
+			];
+			var color_count = colors.length;
+			var block_count = 32;
+			var rand = 0;
+			var block_size = window.innerWidth / block_count;
+			var container = document.getElementById("login_banner");
+			var last_y = window.innerHeight * 0.4;
+			for (var i = 0; i < block_count; i++)
+			{
+				var block = document.createElement('div');
+				block.setAttribute('class', 'color-square');
+				block.style.height = block_size + "px";
+				block.style.width = block_size + "px";
+				block.style.backgroundColor = colors[i % color_count];
+				if (last_y < 0.1 * window.innerHeight)
+					rand = 3;
+				else if (last_y > 0.6 * window.innerHeight)
+					rand = 2;
+				else if (i == 0 || i % 2 == 0) {
+					rand = parseInt(Math.random() * 10) % 4;
+				}
+				if (rand % 2 == 0)
+					last_y -= block_size;
+				else
+					last_y += block_size;
+				block.style.top = last_y + "px";
+				block.style.left = (i * block_size) + "px";
+				//block.style.transitionDelay = (rand/2) + "s";
+				container.appendChild(block);
+			}
+			/*setTimeout(function()
+			{
+				var blocks = document.getElementsByClassName('color-square');
+				console.log(blocks);
+				for (var i = 0; i < blocks.length; ++i)
+					blocks[i].style.opacity = 1;	
+			}, 1000);*/
+
+		}
+
+block content
+	div#login_banner
+		h1= locals.title
+		p= locals.catchphrase
+			img(src="/images/geolocation-icon.svg", type="image/svg+xml", style="height:100%;")
+		div.color-square
+		span(style="display:inline-block")
+			form(method="POST", action="/login")
+				fieldset
+					input(name="identifier", type="text", placeholder="Username or email")
+					br
+					input(name="password", type="password", placeholder="Password")
+					- if (login_errors)
+						p.alert.alert-error #{login_errors}
+					- else
+						br
+					input.btn.btn-inverse.btn-large(name="submit", value="Log in", type="submit")
+					a.btn.btn-success.btn-large(href="/register", style="margin-left:10px") Register
+
+		img(src="/images/mario-level.png", style="bottom:25px; position:fixed; left:0px; opacity:0.6;z-index:0;")

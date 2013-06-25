@@ -1,0 +1,91 @@
+body {
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background: url("/images/binding_dark.png");
+}
+
+a {
+  color: white;
+}
+
+h1 {
+	color : #ecf0f1;
+}
+
+p {
+	color : #7f8c8d;
+}
+
+/***
+**
+**  HEADER
+**
+**/
+
+#header
+{
+	height : 50px;
+	background-color: rgba(0, 0, 0, 0.8);
+	position: fixed;
+	top: 0px;
+	margin: auto;
+	overflow: visible;
+	z-index: 100000;
+	width: 100%;
+	color: white;
+
+	padding-left: 10%;
+}
+
+.header-icon
+{
+	height : 90%;
+}
+
+#header a
+{
+	font-weight: bold;
+	font-size: 20px;
+	height: 50%;
+	margin : 5px;
+	vertical-align: middle;
+	opacity : 0.8;
+}
+
+#headerTitle
+{
+	display: inline;
+	font-weight: bold;
+	font-size: 30px;
+	height: 50%;
+	margin-right : 15px;
+	vertical-align: middle;
+}
+
+#header a:hover
+{
+	opacity : 1;
+	text-decoration: none;
+}
+
+/***
+**
+**  FOOTER
+**
+**/
+
+#footer
+{
+	bottom: 0px;
+	color : white;
+	background-color: rgba(0,0,0,0.7);
+	height : 25px;
+	position : fixed;
+	width : 100%;
+
+	transition : background-color 1s;
+}
+
+#footer:hover
+{
+	background-color: rgba(0,0,0,1);
+}

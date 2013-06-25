@@ -1,0 +1,10 @@
+extends layout
+
+append head
+	link(rel='stylesheet', href='/stylesheets/home-style.css')
+
+block content
+		#page-container
+			h1 Welcome  #{session.user.username}
+			form(method="POST", action="/logout")
+				input(type="submit", value="Log out")

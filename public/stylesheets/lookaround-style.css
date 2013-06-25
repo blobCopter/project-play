@@ -1,0 +1,21 @@
+
+#lookAroundContainer
+{
+	padding-left: 10%;
+	padding-right: 10%;
+}
+
+#nearbyTable
+{
+	color: white;
+}
+
+#leftSpan
+{
+	border : 1px solid white;
+}
+
+#rightSpan
+{
+	border : 1px solid red;
+}

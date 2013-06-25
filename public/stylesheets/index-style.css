@@ -1,0 +1,32 @@
+
+body {
+
+}
+
+#login_banner
+{
+	padding-left: 10%;
+	padding-right: 10%;
+	height : 100%;
+	z-index: 10;
+}
+
+.color-square
+{
+	background-color: red;
+	position: absolute;
+	z-index : -100;
+	top: 0px;
+	left: 0px;
+	width: 0px;
+	height: 0px;
+	opacity: 1;
+	
+	//transition:opacity 1s;
+}
+
+.color-square:hover
+{
+	
+    //opacity : 0;
+}

@@ -44,12 +44,13 @@ db.once('open', function() {
 
 	app.get('/', home.index);
 	app.get('/users', user.list);
-	app.use('/register', require('./routes/register'));	
+	app.get('/register', require('./routes/register'));	
 	app.post('/logout', require('./routes/logout'));
 	app.get('/logout', require('./routes/logout'));
 	app.post('/login', require('./routes/login'));
-	app.get('/geosearch', require('./routes/lookaround').geo_page);
-	app.post('/geosearch', require('./routes/lookaround').geo_service);
+	app.get('/lookaround', require('./routes/lookaround').geo_page);
+	app.post('/lookaround', require('./routes/lookaround').geo_service);
+	app.use('/rest',  require('./routes/rest/api'));
 
 	console.log("DB CONNECTED");
 });

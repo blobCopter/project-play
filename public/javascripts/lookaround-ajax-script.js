@@ -58,7 +58,7 @@ window.addEventListener('load', function()
 			$('#position').text("My location : " + position.coords.latitude + "/" + position.coords.longitude);
 			$.ajax({
 				type: 'POST',
-				url: "/geosearch",
+				url: "/lookaround",
 				dataType: "JSON",
 				data: { 
 					posX : position.coords.latitude,

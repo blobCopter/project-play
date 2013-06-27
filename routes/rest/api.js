@@ -22,5 +22,11 @@ module.exports = function()
 	app.put('/users/:id', rest_users.updateUser);
 	app.delete('/users/:id', rest_users.deleteUser);
 
+	/*
+	* REST/GAMSE
+	*/
+	var rest_games = require('./games-rest');
+	app.get('/games/search', rest_games.findGameByName);
+
 	return app;
 }();

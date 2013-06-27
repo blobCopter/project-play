@@ -54,21 +54,22 @@ block content
 		}		
 
 
-	div.row-fluid
-		div.span6(style="text-align: right;")
-			h1 Sign up
-			form#registerForm(method="POST", action="/register")
-				fieldset
-					input(name="username",type="text", placeholder="User name")
-					br
-					input(name="email", type="text", placeholder="Email")
-					br
-					input(name="password", type="password", placeholder="Password")
-					br
-					input(name="password_verif", type="password", placeholder="Retype password")
-					br 
-					input#registerSubmitButton.btn.btn-success.btn-large(type="submit", value="Register now", data-original-title="Registration Error")
-					- if (error_msg)
-						p #{error_msg}
-		div.span6
-			img.img-circle(src="/images/webmaster.jpg", style="width:20%")
+	div(style="padding-top:5%;")
+		div.row-fluid
+			div.span6(style="text-align: right;")
+				h1 Sign up
+				form#registerForm(method="POST", action="/register")
+					fieldset
+						input(name="username",type="text", placeholder="User name")
+						br
+						input(name="email", type="text", placeholder="Email")
+						br
+						input(name="password", type="password", placeholder="Password")
+						br
+						input(name="password_verif", type="password", placeholder="Retype password")
+						br 
+						input#registerSubmitButton.btn.btn-success.btn-large(type="submit", value="Register now", data-original-title="Registration Error")
+						- if (error_msg)
+							p #{error_msg}
+			div.span6
+				img.img-circle(src="/images/webmaster.jpg", style="width:20%")

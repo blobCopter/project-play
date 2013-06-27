@@ -51,21 +51,22 @@ append head
 		}
 
 block content
-	div#login_banner
-		h1= locals.title
-		p= locals.catchphrase
-			img(src="/images/geolocation-icon.svg", type="image/svg+xml", style="height:100%;")
-		div.color-square
-		span(style="display:inline-block")
-			form(method="POST", action="/login")
-				fieldset
-					input(name="identifier", type="text", placeholder="Username or email")
-					br
-					input(name="password", type="password", placeholder="Password")
-					br
-					input.btn.btn-inverse.btn-large(name="submit", value="Log in", type="submit")
-					a.btn.btn-success.btn-large(href="/register", style="margin-left:10px") Register
-					- if (login_errors)
-						p.alert.alert-error #{login_errors}
+	div(style="padding-top:5%;")
+		div#login_banner
+			h1= locals.title
+			p= locals.catchphrase
+				img(src="/images/geolocation-icon.svg", type="image/svg+xml", style="height:100%;")
+			div.color-square
+			span(style="display:inline-block")
+				form(method="POST", action="/login")
+					fieldset
+						input(name="identifier", type="text", placeholder="Username or email")
+						br
+						input(name="password", type="password", placeholder="Password")
+						br
+						input.btn.btn-inverse.btn-large(name="submit", value="Log in", type="submit")
+						a.btn.btn-success.btn-large(href="/register", style="margin-left:10px") Register
+						- if (login_errors)
+							p.alert.alert-error #{login_errors}
 
-		img(src="/images/mario-level.png", style="bottom:25px; position:fixed; left:0px; opacity:0.6;z-index:0;")
+			img(src="/images/mario-level.png", style="bottom:25px; position:fixed; left:0px; opacity:0.6;z-index:0;")

@@ -19,6 +19,13 @@ function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
   return d;
 }
 
+function getCleanDistanceString(distance)
+{
+	if (distance < 2)
+		return (Math.round(distance * 1000) + " meters");
+	return (distance.toFixed(1) + " km");
+}
+
 function deg2rad(deg) {
   return deg * (Math.PI/180)
 }
@@ -41,7 +48,6 @@ function	gMapsStaticApiRequest(centerX, centerY, items)
 	return link;
 }
 
-
 window.addEventListener('load', function()
 {
 	if (!navigator.geolocation)
@@ -51,6 +57,8 @@ window.addEventListener('load', function()
 	{
 		if (!navigator.geolocation)
 			return false;
+
+		document.getElementById('loaderAnimation').style.visibility = 'visible';
 
 		var onGeolocationSuccess = function(position)
 		{
@@ -82,22 +90,40 @@ window.addEventListener('load', function()
 						else if (distance < 10)
 							color = '#fcf8e3';
 
-
 						items.push(
+						"<div class='accordion-group'>" +
+							"<div class='accordion-heading' style='background-color:" + color + "'>" +
+						    	"<a class='accordion-toggle' data-toggle='collapse' data-parent='#nearbyTable' href='#collapse" + i + "'>" +
+						    		item.username +
+						     	"</a>" +
+						    "</div>" +
+						    "<div id='collapse" + i + "' class='accordion-body collapse'>" +
+						      	"<div class='accordion-inner'>" +
+						        	"Distance : " + getCleanDistanceString(distance) + 
+						      	"</div>" + 
+						    "</div>" +
+						"</div>");
+
+						/*items.push(
 							"<tr style='background-color:" + color + "'>" +
 								"<th>" + item.username + "</th>" +
 								"<th>" + item.creationDate +"</th>" +
-								"<th>" + distance + " km (" + item.geo[0] + "/" + item.geo[1] + ") </th>" +
+								"<th>" + getCleanDistanceString(distance) + "</th>" +
 							"</tr>"
-						);
+						);*/
 					});
 					console.log(gMapsStaticApiRequest(position.coords.latitude, position.coords.longitude, data.nearby));
 					document.getElementById('gamerMap').setAttribute('src', gMapsStaticApiRequest(position.coords.latitude, position.coords.longitude, data.nearby));
-					$('#tableNearbyBody').html(items.join(' '));
+					document.getElementById('gamerMap').onload = function() {
+						document.getElementById('mapContainer').style.visibility = 'visible';
+					}
+					document.getElementById('loaderAnimation').style.visibility = 'hidden';
+					$('#nearbyTable').html(items.join(' '));
 				},
 				error : function(err)
 				{
 					console.log('error');
+					document.getElementById('loaderAnimation').style.visibility = 'hidden';
 					return displayError("Error. Unable to query server. Try again later.");
 				}
 			});

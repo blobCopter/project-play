@@ -1,9 +1,9 @@
-
 #lookAroundContainer
 {
 	padding-left: 10%;
 	padding-right: 10%;
 	font-weight: lighter;
+	height : 70%;
 }
 
 #nearbyTable
@@ -12,8 +12,9 @@
 	background-color: white;
 }
 
-#nearbyTable th
+#nearbyTable a
 {
+	color : black;
 	font-weight: lighter;
 }
 
@@ -21,9 +22,35 @@
 {
 	border : 1px solid white;
 	height : 100%;
+	text-align: center;
 }
 
 #rightSpan
 {
+	height: 50%;
+}
+
+#mapContainer
+{
+	background-position: center bottom;
+	background-repeat:no-repeat;
+	visibility : hidden;
+	width : 100%;
+}
+
+#gamerMap
+{
+	width:80%;
+	margin: auto;
+}
+
+#lookAroundButtonHolder
+{
+	width : 100%;
 	text-align: center;
+}
+
+#loaderAnimation
+{
+	visibility: hidden;
 }

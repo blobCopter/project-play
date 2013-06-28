@@ -10,7 +10,7 @@ placeSchema.methods.findNear = function(cb) {
 
 	var km = function(distance) { return (distance/111.12); } 
 
-	return this.model('Place').find({geo: { $near: this.geo, $maxDistance: km(2)} }, cb);
+	return this.model('Place').find({geo: { $near: this.geo, $maxDistance: km(20)} }, cb);
 }
 
 module.exports = mongoose.model('Place', placeSchema);

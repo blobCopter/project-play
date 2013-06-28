@@ -13,20 +13,21 @@ append head
 //
 //
 block content
-	#lookAroundContainer
-		div#errorField(style="display:none")
-		.container-fluid
-			.row-fluid
-				.span2#leftSpan
-					p Look around
-					form#lookAroundButton(method="POST", action="/geosearch")
-						input.btn.btn-primary(type="submit", value="Start")
-					p#position
-				.span10#rightSpan
-					table#nearbyTable.table.table-hover
-						thead
-							tr
-								th User
-								th About
-								th Distance
-						tbody#tableNearbyBody
+	div(style="padding-top:5%;")
+		#lookAroundContainer
+			#lookAroundButtonHolder
+				form#lookAroundButton
+					input.btn.btn-warning.btn-large(type="submit", value="Look around")
+				p#position
+				img#loaderAnimation(src="/images/ajax-loader.gif")
+			div#errorField(style="display:none")
+			.container-fluid
+				.row-fluid
+					// LEFT SIDE
+					.span4#leftSpan
+						div#mapContainer
+							img#gamerMap.img-polaroid
+
+					// RIGHT SIDE
+					.span8#rightSpan
+						#nearbyTable.accordion

@@ -1,6 +1,7 @@
 var mongoose = require('mongoose'),
 	bcrypt = require('bcrypt-nodejs'),
 	Tag = require('./tag'),
+	Place = require('./place'),
 	SALT_ROUNDS = 10;
 
 /**
@@ -26,7 +27,6 @@ userSchema.pre('save', function(next)
 
 	if (!user.isModified('password'))
 		return next();
-	console.log("FAP");
 	bcrypt.genSalt(SALT_ROUNDS, function(err, salt)
 	{
 		if (err)
@@ -51,6 +51,14 @@ userSchema.methods.comparePassword = function(password_to_test, callback)
 		callback(null, isMatch);
 	});
 };
+
+userSchema.methods.createPlace = function(x, y)
+{
+	return new Place({
+		username : this.username,
+		geo : [x, y]
+	});
+}
 
 
 module.exports = mongoose.model("User", userSchema);

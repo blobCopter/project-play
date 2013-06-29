@@ -3,7 +3,7 @@ extends layout
 append head
 	link(rel='stylesheet', href='/stylesheets/index-style.css')
 	script
-		window.onload = function()
+		window.addEventListener('load', function()
 		{
 			var colors = [
 				"#1abc9c", "#2ecc71", "#3498db", "#9b59b6", "#34495e",
@@ -48,14 +48,14 @@ append head
 					blocks[i].style.opacity = 1;	
 			}, 1000);*/
 
-		}
+		}, false);
 
 block content
 	div(style="padding-top:5%;")
 		div#login_banner
 			h1= locals.title
 			p= locals.catchphrase
-				img(src="/images/geolocation-icon.svg", type="image/svg+xml", style="height:100%;")
+				img(src="/images/geolocation-icon.png", type="image/svg+xml", style="height:32px;")
 			div.color-square
 			span(style="display:inline-block")
 				form(method="POST", action="/login")

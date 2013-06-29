@@ -1,0 +1,26 @@
+extends layout
+
+append head
+	style
+		.account-content-block
+		{
+			padding : 1%;
+			margin-top : 10px;
+		}
+
+		.account-field
+		{
+			color : #ecf0f1;
+		}
+
+block content
+	div(style="padding-top:5%;margin-left:20%;margin-right:20%;padding-left:3%;padding-right:3%")
+		div.account-content-block.flat-color-carrot
+			h2 #{session.user.username}'s account information
+		div.account-content-block.flat-color-green-sea
+			img.img-polaroid.avatar_img(src="/rest/avatars/" + session.user.username)
+			form(method="POST", enctype="multipart/form-data", action="/rest/avatars/" + session.user.username)
+				input(type="file", name="profile_picture")
+				input(type="Submit")
+		div.account-content-block.flat-color-pomegranate
+			strong.account-field email : #{session.user.email}

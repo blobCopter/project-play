@@ -37,5 +37,13 @@ module.exports = function()
 	app.post('/requests', rest_requests.addRequest);
 	app.delete('/requests', rest_requests.deleteRequest);
 
+	/*
+	* AVATARS
+	* REST/AVATARS
+	*/
+	var rest_avatars = require('./avatars-rest');
+	app.post('/avatars/:username', rest_avatars.setAvatar);
+	app.get('/avatars/:username', rest_avatars.getAvatarByUserName);
+
 	return app;
 }();

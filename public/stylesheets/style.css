@@ -11,8 +11,18 @@ h1 {
 	color : #ecf0f1;
 }
 
+h2 {
+	color : #ecf0f1;
+}
+
 p {
 	color : #7f8c8d;
+}
+
+.avatar_img
+{
+	width : 160px;
+	height : 160px;
 }
 
 /***
@@ -90,3 +100,4 @@ p {
 {
 	background-color: rgba(0,0,0,1);
 }
+

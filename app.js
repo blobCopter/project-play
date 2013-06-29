@@ -35,6 +35,17 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
+var Fs = require('fs');
+if (!Fs.existsSync(__dirname + '/public/uploads'))
+{
+	Fs.mkdirSync(__dirname + '/public/uploads');
+	Fs.mkdirSync(__dirname + '/public/uploads/avatars');
+}
+else if (!Fs.existsSync(__dirname + '/public/uploads/avatars'))
+{
+	Fs.mkdirSync(__dirname + '/public/uploads/avatars');
+}
+
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/playproject');
 
@@ -48,9 +59,11 @@ db.once('open', function() {
 	app.post('/logout', require('./routes/logout'));
 	app.get('/logout', require('./routes/logout'));
 	app.post('/login', require('./routes/login'));
+	app.get('/account', require('./routes/account'));	
 	app.get('/lookaround', require('./routes/lookaround').geo_page);
 	app.post('/lookaround', require('./routes/lookaround').geo_service);
 	app.use('/rest',  require('./routes/rest/api'));
+
 
 	console.log("DB CONNECTED");
 });

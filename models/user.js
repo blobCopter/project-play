@@ -15,7 +15,8 @@ var userSchema = mongoose.Schema({
     friends: [String], // private
     current_game: {type : String, default:""}, // public
     looking_for: {type : String, default:""}, // public
-    tags: [String] // public
+    tags: [String], // public,
+    profilePictureName: {type: String, default: ""} // hidden
 });
 
 /**

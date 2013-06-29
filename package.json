@@ -7,15 +7,11 @@
   },
   "dependencies": {
     "express": "3.2.6",
-<<<<<<< HEAD
     "express-validator" : "*",
     "jade": "*",
     "bcrypt-nodejs": "*",
-    "mongoose" : "*"
-=======
-    "jade": "*",
+    "mongoose" : "*",
     "xml2js": "*",
     "async": "*"
->>>>>>> adc475dfec245f79a0d2778c37f53b3390cbdbdf
   }
 }

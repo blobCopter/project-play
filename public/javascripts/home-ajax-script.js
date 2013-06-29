@@ -4,7 +4,7 @@ window.addEventListener('load', function()
 	$('#gameEntryField').autocomplete({
         source: function(query, process) {
             $.ajax({
-                url: '/rest/games/search',
+                url: '/rest/games',
                 type: 'GET',
                 data: 'name=' + query.term,
                 dataType: 'JSON',

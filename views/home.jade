@@ -3,6 +3,8 @@ extends layout
 append head
 	link(rel='stylesheet', href='http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css')
 	link(rel='stylesheet', href='/stylesheets/home-style.css')
+	link(rel='stylesheet', href='/stylesheets/timeline.css')
+	link(rel='stylesheet', href='/stylesheets/flat-ui-colors.css')
 	script(src="http://code.jquery.com/ui/1.10.3/jquery-ui.js")
 	script(src="/javascripts/home-ajax-script.js")
 
@@ -10,7 +12,13 @@ append head
 block content
 		div(style="padding-top:5%;")
 			#page-container
-				h1 Welcome  #{session.user.username}
-				form(method="POST", action="/logout")
-					input#gameEntryField(type="text", name="game_name_search", placeholder="Mario Kart")
+				ul.timeline
+					h1 Home
+					input#gameEntryField(type="text", name="game_name_search", placeholder="What are you playing ? (Example : Mario Kart)")
+					li.timeline-post.flat-color-peter-river
+						img(src="/images/avatar-placeholder.svg", width=64, height=64)
+						strong Sebastian started playing Lollipop Chainsaw. Click to join him.
+					li.timeline-post.flat-color-carrot 3 persons in your neighborhood are playing the same game as you. Find out who they are.
+					li.timeline-post.flat-color-nephritis Status updated. You are looking for : A farmville associate. Click here to find gamers nearby.
+					li.timeline-post.flat-color-carrot You are now playing : Mario Kart
 

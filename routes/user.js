@@ -8,9 +8,11 @@ var User = require('../models/user');
 exports.list = function(req, res)
 {
 
+	var fields = User.allFieldsStr();
+
 	list = {};
 
-	User.find(function(err, users)
+	User.find({}, fields, function(err, users)
 	{
 		res.send(users);
 	})

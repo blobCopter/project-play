@@ -1,0 +1,43 @@
+.timeline
+{
+  margin: 0 auto;
+  max-width: 700px;
+  overflow: hidden;
+  height: auto;
+  position: relative;
+  padding: 0px;
+  /*background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAEElEQVQIW2NMTEz8z8gABAAPKwIlXWq1kgAAAABJRU5ErkJggg==);*/
+  background: url('/images/timeline-bg.png');
+  background-repeat: repeat-y;
+  background-position: 20% 0;
+}
+
+.timeline-post
+{
+  background-color: rgba(0,0,0, 0.5);
+  color: white;
+  margin: 2em auto;
+  border-radius: 1%;
+  text-align: left;
+  padding-left: 10px;
+  padding-bottom: 10px;
+  padding-top: 10px;
+
+  transition: margin-left 1s;
+  -webkit-transition: margin-left 1s;  /* Chrome 1-25, Safari 3.2+ */
+  -moz-transition: margin-left 1s;  /* Firefox 4-15 */
+  -o-transition: margin-left 1s;
+
+}
+
+.timeline-post:hover
+{
+  color: #95a5a6;
+  background-color: white;
+  margin-left: 2em;
+}
+
+
+/*.timeline-post:before {
+    content: url('/images/geolocation-icon.svg');
+}*/

@@ -1,6 +1,5 @@
 var mongoose = require('mongoose'),
 	bcrypt = require('bcrypt-nodejs'),
-	Tag = require('./tag'),
 	Place = require('./place'),
 	SALT_ROUNDS = 10;
 
@@ -9,12 +8,14 @@ var mongoose = require('mongoose'),
 *
 */
 var userSchema = mongoose.Schema({
-    username: { type : String, unique : true, required: true },
-    email: { type : String, unique : true, required: true },
-    password: { type : String, required : true},
-    current_game: {type : String, default:""},
-    looking_for: {type : String, default:""},
-    tags: [Tag]
+    username: { type : String, unique : true, required: true }, // public
+    email: { type : String, unique : true, required: true }, //private
+    creationDate: { type: Date, default: Date.now }, // hidden
+    password: { type : String, required : true}, // hidden
+    friends: [String], // private
+    current_game: {type : String, default:""}, // public
+    looking_for: {type : String, default:""}, // public
+    tags: [String] // public
 });
 
 /**
@@ -41,6 +42,22 @@ userSchema.pre('save', function(next)
 		});
 	});
 });
+
+
+userSchema.statics.publicFieldsStr = function()
+{
+	return "username current_game looking_for tags";
+}
+
+userSchema.statics.privateFieldsStr = function()
+{
+	return "email friends friend_requests_to friend_requests_from"
+}
+
+userSchema.statics.allFieldsStr = function()
+{
+	return "username current_game looking_for tags email friends friend_requests_to friend_requests_from";
+}
 
 userSchema.methods.comparePassword = function(password_to_test, callback)
 {

@@ -2,10 +2,19 @@ var http = require("http");
 var parseXML = require('xml2js').parseString;
 var async = require('async');
 
-// GET /rest/games/search
-
-exports.findGameByName = function(req, res)
+// GET /rest/games
+// params : name
+exports.searchGamesByName = function(req, res)
 {
+	if (!req.query['name'] || req.query['name'].length == 0)
+	{
+		res.send({
+			Data : {
+				GameTitle : []
+			}
+		});
+		return;
+	}
 	var my_request = http.get('http://thegamesdb.net/api/GetGamesList.php?name=' + req.query['name'],
 		function(resp)
 		{
@@ -52,6 +61,5 @@ exports.findGameByName = function(req, res)
 				GameTitle : ["..."]
 			}
 		});
-	}
 	});
 }

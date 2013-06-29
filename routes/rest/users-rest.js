@@ -17,7 +17,7 @@ exports.findAll = function(req, res)
 		return;
 	}
 
-	User.find({}, function(err, all_users)
+	User.find({}, User.publicFieldsStr(), {}, function(err, all_users)
 	{
 		var result;
 		if (err)
@@ -38,7 +38,7 @@ exports.findAll = function(req, res)
 	});
 }
 
-// GET /rest/users/:id
+// GET /rest/users/:username
 exports.findById = function(req, res)
 {
 	if (!req.session.logged)
@@ -46,26 +46,38 @@ exports.findById = function(req, res)
 		res.send({success:false, errors:["Bad authentification"]});
 		return;
 	}
-	
-	User.findOne({username : req.params.id}, function(err, user)
-	{
-		var result;
-		if (err)
+
+	var fields;
+	if (req.session.user.username == req.params.username)
+		fields = User.allFieldsStr();
+	else
+		fields = User.publicFieldsStr();
+
+
+	User.findOne(
+		{username : req.params.username},
+		fields,
+		null,
+		function(err, user)
 		{
-			result = {
-				success: false,
-				errors : ["Failed to access db"],
+			var result;
+			if (err)
+			{
+				result = {
+					success: false,
+					errors : ["Failed to access db"],
+				}
 			}
-		}
-		else
-		{
-			result = {
-				success : true,
-				data : user
+			else
+			{
+				result = {
+					success : true,
+					data : user
+				}
 			}
+			res.send(result)
 		}
-		res.send(result)
-	});
+	);
 }	
 
 // POST /rest/users
@@ -123,7 +135,7 @@ exports.addUser = function(req, res)
 	});
 }
 
-// POST /rest/users/:id
+// POST /rest/users/:username
 exports.updateUser = function(req, res)
 {
 	if (!req.session.logged)
@@ -133,7 +145,7 @@ exports.updateUser = function(req, res)
 	}
 
 	// if updating someone else's info
-	if (req.params.id != req.session.user.username)
+	if (req.params.username != req.session.user.username)
 	{
 		res.send({success:false, errors:["Permission denied"]});
 		return;
@@ -142,7 +154,7 @@ exports.updateUser = function(req, res)
 	res.send({success:false, errors:["Not implemented yet"]});
 }
 
-// DELETE /rest/users/:id
+// DELETE /rest/users/:username
 exports.deleteUser = function(req, res)
 {
 	if (!req.session.logged)
@@ -152,13 +164,13 @@ exports.deleteUser = function(req, res)
 	}
 
 	// if deleting someone else's info
-	if (req.params.id != req.session.user.username)
+	if (req.params.username != req.session.user.username)
 	{
 		res.send({success:false, errors:["Permission denied"]});
 		return;
 	}
 
-	User.findOneAndRemove({ username : req.params.id }, function(err, removed)
+	User.findOneAndRemove({ username : req.params.username }, function(err, removed)
 	{
 		if (err)
 			res.send({success:false, errors:["Database access failed"]});

@@ -12,6 +12,19 @@
     "bcrypt-nodejs": "*",
     "mongoose" : "*",
     "xml2js": "*",
-    "async": "*"
+    "async": "*",
+    "mongodb": "*",
+    "regexp-clone" : "*",
+    "sliced" : "*",
+    "mpath": "*",
+    "ms" : "*",
+    "hooks" : "*",
+    "mpromise" : "*",
+    "muri" : "*",
+    "sax" : "*",
+    "character-parser" : "*",
+    "transformers" : "*",
+    "constantinople" : "*",
+    "with" : "*"
   }
 }
